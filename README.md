@@ -19,7 +19,7 @@ The focus of VeRT is on the better compatibility than the performance, so it can
 ## Installation
 
 ```shell
-npm install @eosnetwork/vert
+npm install @robinholmes/vert
 ```
 
 ## Test

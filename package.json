@@ -1,9 +1,12 @@
 {
-  "name": "@eosnetwork/vert",
-  "version": "1.0.0",
-  "homepage": "https://github.com/eosnetworkfoundation/vert",
+  "name": "@robinholmes/vert",
+  "version": "1.0.1",
+  "homepage": "https://github.com/robinholmes/vert",
   "description": "Testing library for Antelope (EOS) blockchain smart contracts",
   "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "types": "dist/index.d.ts",
   "files": [
     "dist",
@@ -16,7 +19,7 @@
     "test": "mocha src/**/*.spec.ts -r ts-node/register && yarn --cwd examples",
     "prepublish": "npm run test && npm run build"
   },
-  "author": "Jeeyong Um <conr2d@gmail.com>",
+  "author": "RobinHolmes <robin.holmes@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.3.11",
