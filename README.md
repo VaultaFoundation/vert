@@ -22,14 +22,6 @@ The focus of VeRT is on the better compatibility than the performance, so it can
 npm install @vaulta/vert
 ```
 
-## Test
-
-```shell
-npm run test
-```
-
-
-
 ## Example usage
 
 ```typescript
@@ -91,3 +83,12 @@ describe('Testing Suite', () => {
     });
 });
 ```
+
+
+
+## Test
+
+```shell
+npm run test
+```
+
