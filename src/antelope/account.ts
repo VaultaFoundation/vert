@@ -25,7 +25,8 @@ export class Account {
 
   readonly actions: {
     [key: string]: (actionData?: any[] | object) => {
-      send: (authorization?: string | PermissionLevelType | PermissionLevelType[], options?: Partial<TransactionHeader>) => Promise<any>
+      send: (authorization?: string | PermissionLevelType | PermissionLevelType[], options?: Partial<TransactionHeader>) => Promise<any>,
+      read: () => Promise<any>
     }
   } = {};
   readonly tables: {
@@ -120,30 +121,35 @@ export class Account {
           object: data,
         }).array;
 
-        return {
-          send: async (authorization?: string | PermissionLevelType | PermissionLevelType[], options?: Partial<TransactionHeader>) => {
-            // .send()
-            if (!authorization) {
-              authorization = `${this.name}@active`;
-            }
-            // .send("account")
-            else if ( typeof authorization == "string" && !authorization.includes("@") ) {
-              authorization += '@active';
-            }
-
-            return await this.bc.applyTransaction(Transaction.from({
-              actions: [{
-                account: this.name,
-                name: Name.from(action.name),
-                data: serializedData,
-                authorization: (Array.isArray(authorization) ? authorization : [authorization]).map(_ => PermissionLevel.from(_))
-              }],
-              expiration: 0,
-              ref_block_num: 0,
-              ref_block_prefix: 0,
-              ...(options || {})
-            }), data)
+        const send = async (authorization?: string | PermissionLevelType | PermissionLevelType[], options?: Partial<TransactionHeader>, readonly?: boolean) => {
+          // .send()
+          if (!authorization) {
+            authorization = `${this.name}@active`;
           }
+          // .send("account")
+          else if ( typeof authorization == "string" && !authorization.includes("@") ) {
+            authorization += '@active';
+          }
+
+          return await this.bc.applyTransaction(Transaction.from({
+            actions: [{
+              account: this.name,
+              name: Name.from(action.name),
+              data: serializedData,
+              authorization: (Array.isArray(authorization) ? authorization : [authorization]).map(_ => PermissionLevel.from(_))
+            }],
+            expiration: 0,
+            ref_block_num: 0,
+            ref_block_prefix: 0,
+            ...(options || {})
+          }), data, readonly)
+        }
+
+        return {
+            read: async (options?: Partial<TransactionHeader>) => {
+              return send(null, options, true);
+          },
+          send
         }
       }
     });

@@ -101,7 +101,7 @@ export class Blockchain {
     }
   }
 
-  public async applyTransaction (transaction: Transaction, decodedData?: any) {
+  public async applyTransaction (transaction: Transaction, decodedData?: any, readonly?:boolean) {
     await this.resetTransaction()
 
     // Take blockchain snapshot
@@ -126,7 +126,7 @@ export class Blockchain {
       this.setStorageDeltas()
     }
 
-    return this.actionTraces.map(ctx => {
+    const returnValues =  this.actionTraces.map(ctx => {
       let deserializedReturnValue = null;
       if(ctx.returnValue && ctx.returnValue.length) {
         const resultType = ctx.receiver.abi.action_results.find(x => x.name === ctx.action.toString())?.result_type;
@@ -149,6 +149,15 @@ export class Blockchain {
         executionOrder: ctx.executionOrder,
       }
     }).filter(x => !!x.returnValue)
+
+    if(readonly){
+      if(returnValues.length > 0){
+        return returnValues[0].returnValue;
+      }
+      return null;
+    } else {
+      return returnValues;
+    }
   }
 
   public getAccount(name: Name): Account | undefined {

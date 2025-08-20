@@ -36,4 +36,9 @@ describe('return values', () => {
         expect(result[0].returnValue.value.toNumber()).to.equal(1111);
         expect(result[0].returnValue.control.toNumber()).to.equal(3456);
     });
+    it('should be able to use read instead of send', async () => {
+        const result = await contract.actions.inlinedval([1234]).read();
+        expect(result.value.toNumber()).to.equal(1234);
+        expect(result.control.toNumber()).to.equal(9876);
+    });
 });
