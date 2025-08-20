@@ -26,7 +26,7 @@ export class Account {
   readonly actions: {
     [key: string]: (actionData?: any[] | object) => {
       send: (authorization?: string | PermissionLevelType | PermissionLevelType[], options?: Partial<TransactionHeader>) => Promise<any>,
-      read: () => Promise<any>
+      read: (options?: Partial<TransactionHeader>) => Promise<any>
     }
   } = {};
   readonly tables: {
