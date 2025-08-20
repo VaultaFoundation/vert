@@ -3,7 +3,7 @@ import Buffer, { bufferToBigInt, readBufferFromBigInt } from "../buffer";
 import { log, Vert } from "../vert";
 import { IndexObject, KeyValueObject, SecondaryKeyStore, Table } from "./table";
 import { IteratorCache } from "./iterator-cache";
-import { Action, Name, NameType, PermissionLevel, PublicKey, Serializer, Signature, Transaction, UInt64, Checksum256 } from "@greymass/eosio";
+import { Action, Name, NameType, PermissionLevel, PublicKey, Serializer, Signature, Transaction, UInt64, Checksum256 } from "@wharfkit/antelope";
 import { sha256, sha512, sha1, ripemd160 } from "hash.js";
 import { sha3_256, keccak256 } from "js-sha3"
 import { bigIntToName, nameToBigInt, nameTypeToBigInt } from "./bn";
@@ -308,7 +308,7 @@ class VM extends Vert {
 
         set_action_return_value: (value: ptr, size: i32): void => {
           log.debug('set_action_return_value');
-          this.context.returnValue = Buffer.from_(this.memory.buffer, value, size)
+          this.context.returnValue = Buffer.from(new Uint8Array(this.memory.buffer, value, size));
         },
   
         // chain

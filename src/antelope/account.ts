@@ -1,6 +1,6 @@
 import { VM } from "./vm";
 import { TableView } from "./table";
-import { API, ABI, Name, NameType, PermissionLevel, PermissionLevelType, Serializer, Transaction, ABIDef, TransactionHeader, TimePoint } from "@greymass/eosio";
+import { API, ABI, Name, NameType, PermissionLevel, PermissionLevelType, Serializer, Transaction, ABIDef, TransactionHeader, TimePoint } from "@wharfkit/antelope";
 import { bnToBigInt, nameToBigInt } from "./bn";
 import { Blockchain } from "./blockchain";
 import { generatePermissions, addInlinePermission } from "./utils";
@@ -25,7 +25,7 @@ export class Account {
 
   readonly actions: {
     [key: string]: (actionData?: any[] | object) => {
-      send: (authorization?: string | PermissionLevelType | PermissionLevelType[], options?: Partial<TransactionHeader>) => Promise<void>
+      send: (authorization?: string | PermissionLevelType | PermissionLevelType[], options?: Partial<TransactionHeader>) => Promise<any>
     }
   } = {};
   readonly tables: {
@@ -97,7 +97,7 @@ export class Account {
     this.abi.actions.forEach((action) => {
       const resolved = this.abi.resolveType(action.name.toString());
 
-      this.actions[resolved.name] = (actionData: any[] | object) => {
+      this.actions[resolved.name] = (actionData: any[] | object): any => {
         const data: Record<string, any> = {};
 
         if (Array.isArray(actionData)) {
@@ -131,7 +131,7 @@ export class Account {
               authorization += '@active';
             }
 
-            await this.bc.applyTransaction(Transaction.from({
+            return await this.bc.applyTransaction(Transaction.from({
               actions: [{
                 account: this.name,
                 name: Name.from(action.name),

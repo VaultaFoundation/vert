@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { expect } from "chai";
 import { Blockchain } from "../../dist";
-import { Name, PermissionLevel, Serializer, Transaction, UInt64 } from "@greymass/eosio"
+import { Name, PermissionLevel, Serializer, Transaction, UInt64 } from "@wharfkit/antelope"
 
 const blockchain = new Blockchain()
 

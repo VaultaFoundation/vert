@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { expect } from "chai";
-import { Name, TimePoint } from "@greymass/eosio"
+import { Name, TimePoint } from "@wharfkit/antelope"
 import { Blockchain } from "../../dist";
 
 const blockchain = new Blockchain()

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Name } from "@greymass/eosio";
+import { Name } from "@wharfkit/antelope";
 import { VM } from "../vm";
 import { Memory } from "../../memory";
 import Buffer from "../../buffer";

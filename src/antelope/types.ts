@@ -1,4 +1,13 @@
-import { Struct, PermissionLevel, UInt16, TypeAlias, Authority, Name, Action } from "@greymass/eosio";
+import {
+    Struct,
+    PermissionLevel,
+    UInt16,
+    TypeAlias,
+    Authority,
+    Name,
+    Action,
+    API
+} from "@wharfkit/antelope";
 import { VM } from "./vm";
 
 @TypeAlias('weight_type')
@@ -15,6 +24,7 @@ export class AccountPermission extends Struct {
     @Struct.field('name') perm_name!: Name
     @Struct.field('name') parent!: Name
     @Struct.field(Authority) required_auth!: Authority
+    @Struct.field(API.v1.AccountLinkedAction) linked_actions?: API.v1.AccountLinkedAction[]
 }
 
 export type ExecutionTrace = {

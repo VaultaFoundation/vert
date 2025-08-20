@@ -1,6 +1,6 @@
 import fs from "fs";
 import { expect } from "chai";
-import { Asset, Name } from "@greymass/eosio";
+import { Asset, Name } from "@wharfkit/antelope";
 import { Blockchain } from "../blockchain";
 import { nameToBigInt, symbolCodeToBigInt } from "../bn";
 import { antelopeAssert } from "../errors";

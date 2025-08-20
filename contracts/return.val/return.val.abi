@@ -1,0 +1,95 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.2",
+    "types": [],
+    "structs": [
+        {
+            "name": "Result",
+            "base": "",
+            "fields": [
+                {
+                    "name": "value",
+                    "type": "uint64"
+                },
+                {
+                    "name": "control",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "inlinedval",
+            "base": "",
+            "fields": [
+                {
+                    "name": "value",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "readreturn",
+            "base": "",
+            "fields": [
+                {
+                    "name": "value",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "without",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "withreturn",
+            "base": "",
+            "fields": [
+                {
+                    "name": "value",
+                    "type": "uint64"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "inlinedval",
+            "type": "inlinedval",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "readreturn",
+            "type": "readreturn",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "without",
+            "type": "without",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "withreturn",
+            "type": "withreturn",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [],
+    "ricardian_clauses": [],
+    "variants": [],
+    "action_results": [
+        {
+            "name": "inlinedval",
+            "result_type": "Result"
+        },
+        {
+            "name": "readreturn",
+            "result_type": "Result"
+        },
+        {
+            "name": "withreturn",
+            "result_type": "Result"
+        }
+    ]
+}

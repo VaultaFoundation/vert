@@ -1,4 +1,4 @@
-import { Name, Transaction, TimePoint, TimePointSec, NameType, Checksum256 } from "@greymass/eosio";
+import {Name, Transaction, TimePoint, TimePointSec, NameType, Checksum256, Serializer} from "@wharfkit/antelope";
 import * as fs from "fs";
 import fetch from "cross-fetch"
 import { diff, flattenChangeset, Operation } from '../utils/diff'
@@ -120,10 +120,35 @@ export class Blockchain {
       throw e;
     }
 
+
     if (this.isStorageDeltasEnabled) {
       this.postStorage = this.getStorage()
       this.setStorageDeltas()
     }
+
+    return this.actionTraces.map(ctx => {
+      let deserializedReturnValue = null;
+      if(ctx.returnValue && ctx.returnValue.length) {
+        const resultType = ctx.receiver.abi.action_results.find(x => x.name === ctx.action.toString())?.result_type;
+        if (!resultType) {
+          throw new Error(`No result type found for action ${ctx.action} in contract ${ctx.receiver.name}`);
+        }
+        deserializedReturnValue = Serializer.decode({
+            abi: ctx.receiver.abi,
+            type: resultType,
+            data: ctx.returnValue
+        })
+      }
+
+      return {
+        action: ctx.action,
+        receiver: ctx.receiver.name,
+        firstReceiver: ctx.firstReceiver.name,
+        returnValue: deserializedReturnValue,
+        actionOrdinal: ctx.actionOrdinal,
+        executionOrder: ctx.executionOrder,
+      }
+    }).filter(x => !!x.returnValue)
   }
 
   public getAccount(name: Name): Account | undefined {

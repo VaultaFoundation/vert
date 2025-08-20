@@ -1,4 +1,4 @@
-import { Name, API, Authority, PermissionLevel } from "@greymass/eosio";
+import { Name, API, Authority, PermissionLevel } from "@wharfkit/antelope";
 import log from "loglevel";
 import { AccountPermission, ExecutionTrace, PermissionLevelWeight } from "./types";
 import { VM } from "./vm";
@@ -33,7 +33,7 @@ export const generatePermissions = (name: Name) => {
       { perm_name: 'active', parent: 'owner' }
     ]
   
-    return defaultPerms.map(({ perm_name, parent }) => AccountPermission.from({
+    return defaultPerms.map(({ perm_name, parent }) => API.v1.AccountPermission.from({
         perm_name,
         parent,
         required_auth: Authority.from({

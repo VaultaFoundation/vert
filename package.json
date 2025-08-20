@@ -1,6 +1,6 @@
 {
   "name": "@vaulta/vert",
-  "version": "1.2.3",
+  "version": "2.0.0",
   "homepage": "https://github.com/eosnetworkfoundation/vert",
   "description": "Testing library for Vaulta smart contracts",
   "main": "dist/index.js",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@ethereumjs/util": "^8.0.0-beta.1",
-    "@greymass/eosio": "^0.5.5",
+    "@wharfkit/antelope": "^1.1.1",
     "bn.js": "^5.2.0",
     "brorand": "^1.1.0",
     "chai": "^4.3.6",

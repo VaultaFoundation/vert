@@ -1,5 +1,5 @@
 import fs from "fs";
-import { Name } from "@greymass/eosio";
+import { Name } from "@wharfkit/antelope";
 import { Blockchain } from "../blockchain";
 import {expectToThrow} from "../../helpers";
 

@@ -1,7 +1,7 @@
 import {CreateItemChange, DeleteItemChange, PrefixedStore, Store, StoreChange} from "../store";
 import {log} from "../vert";
 import BTree from "sorted-btree";
-import {ABI, Name, Serializer, UInt64, NameType} from "@greymass/eosio";
+import {ABI, Name, Serializer, UInt64, NameType} from "@wharfkit/antelope";
 import Buffer from "../buffer";
 import { bigIntToBn, bnToBigInt, nameToBigInt } from "./bn";
 import { Blockchain } from "./blockchain";
